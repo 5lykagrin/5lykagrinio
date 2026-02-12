@@ -6,49 +6,32 @@
     <title>5ο ΓΕΛ Αγρινίου</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #3f51b5; --magenta: #e91e63; --purple: #9c27b0; --bg: #f4f7f6; }
+        :root { --blue: #3f51b5; --magenta: #e91e63; --purple: #9c27b0; --yt-red: #FF0000; --bg: #f4f7f6; }
         body { font-family: 'Open Sans', sans-serif; margin: 0; background: var(--bg); color: #333; scroll-behavior: smooth; }
-        
-        header { 
-            background: white; padding: 10px 5%; display: flex; justify-content: space-between; 
-            align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
-        }
+        header { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-area { display: flex; align-items: center; gap: 12px; }
         .logo-area img { height: 60px; }
-        
         nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
         nav a { text-decoration: none; color: var(--blue); font-weight: bold; font-size: 0.8rem; transition: 0.3s; }
         nav a:hover { color: var(--magenta); }
-
-        .lang-btn { 
-            background: var(--magenta); color: white; border: none; padding: 8px 15px; 
-            border-radius: 20px; cursor: pointer; font-weight: bold;
-        }
-
+        .lang-btn { background: var(--magenta); color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; }
         .hero { background: linear-gradient(135deg, var(--blue), var(--purple)); color: white; text-align: center; padding: 40px 20px; }
         .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 7.5fr 2.5fr; gap: 40px; }
         .section-card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         h2 { font-family: 'Comfortaa'; color: var(--blue); border-left: 5px solid var(--magenta); padding-left: 15px; margin-bottom: 20px; }
-
-        /* Gallery 6 Φωτογραφιών */
-        .school-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .school-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
         .school-gallery img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .school-gallery img:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-        /* Grid για Erasmus, Διακρίσεις, Δράσεις */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
         .item-card { border: 1px solid #eee; border-radius: 12px; overflow: hidden; background: white; transition: 0.3s; }
-        .item-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .item-card img { width: 100%; height: 160px; object-fit: cover; cursor: pointer; }
-        
-        /* Lightbox Viewer */
-        #lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        #lightbox img { max-width: 90%; max-height: 80%; border: 3px solid white; box-shadow: 0 0 25px rgba(0,0,0,0.5); }
-
-        /* Social Links */
+        .date-badge { font-size: 0.75rem; color: #777; font-weight: bold; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .schedule-btn { display: inline-block; margin-top: 15px; background: var(--blue); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .schedule-btn:hover { background: var(--magenta); transform: translateY(-2px); }
         .social-links { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .social-links a { padding: 10px 15px; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
-
+        .social-links a { padding: 10px 18px; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: 0.3s; }
+        .social-links a:hover { opacity: 0.85; transform: translateY(-2px); }
+        #lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        #lightbox img { max-width: 90%; max-height: 80%; border: 3px solid white; }
         @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } .school-gallery { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
@@ -70,7 +53,6 @@
         <section id="home" class="section-card">
             <h2 id="dir-title"></h2>
             <p id="dir-msg" style="white-space: pre-line; font-style: italic;"></p>
-            <p><strong id="dir-name"></strong></p>
         </section>
         
         <section id="school" class="section-card">
@@ -80,6 +62,8 @@
                 <img src="school3.jpg" onclick="openLightbox(this.src)"><img src="school4.jpg" onclick="openLightbox(this.src)">
                 <img src="school5.jpg" onclick="openLightbox(this.src)"><img src="school6.jpg" onclick="openLightbox(this.src)">
             </div>
+            <p id="sch-text" style="line-height: 1.6;"></p>
+            <a href="https://drive.google.com/file/d/1PnjvnAjdiVgyTsCaBQiECdF14dt53QmM/view?usp=sharing" target="_blank" class="schedule-btn" id="sch-link"></a>
         </section>
 
         <section id="erasmus" class="section-card"><h2 id="era-title"></h2><div id="data-erasmus" class="grid"></div></section>
@@ -92,10 +76,9 @@
             <div class="social-links">
                 <a href="https://www.facebook.com/5HighSchoolAgrinioGR/" target="_blank" style="background:#3b5998;">Facebook</a>
                 <a href="https://www.instagram.com/5lykagrin/" target="_blank" style="background:#e4405f;">Instagram</a>
+                <a href="https://www.youtube.com/@5-5highschoolofagrinio90" target="_blank" style="background:var(--yt-red);">YouTube</a>
             </div>
-            <div style="margin-top:20px; border-radius:10px; overflow:hidden; border: 1px solid #ddd;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.805537553556!2d21.4116!3d38.6256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135e612999999999%3A0x6789123456789abc!2zNc6_IM6TzpXOmyDOkc6zz4HOuc69zq_Ov8+F!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1051.1214440198178!2d21.389902022941865!3d38.62345737702997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135e8a0806350d07%3A0xed6d673146490a56!2zNc6_IM6TzrXOvc65zrrPjCDOm8-NzrrOtc65zr8gzpHOs8-BzrnOvc6vzr_PhQ!5e1!3m2!1sel!2sgr!4v1770908331897!5m2!1sel!2sgr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
     </main>
 
@@ -115,26 +98,23 @@
 
 <script>
     let currentLang = 'el';
-
-    // Σύνδεση με το δικό σας Google Sheet (ID & GIDs)
     const SHEET_ID = "1Vxg1fb6tf1xxmJsFe-UgHvxqe9p3cJGEoshYKieCPLM";
-    const GIDS = { 
-        erasmus: '0', 
-        awards: '814179730', 
-        actions: '501557146', 
-        news: '936502549' 
-    };
+    const GIDS = { erasmus: '0', awards: '814179730', actions: '501557146', news: '936502549' };
 
     const ui = {
         el: {
             title: "5ο ΓΕΛ Αγρινίου", hero: "5ο Γενικό Λύκειο Αγρινίου", dir: "Χαιρετισμός Διευθυντή", sch: "Το Σχολείο", 
             era: "Προγράμματα Erasmus+", awa: "Διακρίσεις", act: "Δράσεις", con: "Επικοινωνία", news: "Ανακοινώσεις / Νέα",
+            schText: "Το 5ο Γενικό Λύκειο Αγρινίου προσφέρει ένα σύγχρονο περιβάλλον μάθησης, εστιάζοντας στην ακαδημαϊκή ανάπτυξη και την καλλιέργεια αξιών των μαθητών μας.",
+            schLink: "Ωρολόγιο Πρόγραμμα",
             dirMsg: "Φίλε επισκέπτη,\n\nΚαλώς ήλθες στον ιστοχώρο του Σχολείου μας...\n\nΟ Διευθυντής: Δρ. Φώτης Λαζαρίνης",
             contact: `<p>📍 Εθνικό Στάδιο, Αγρίνιο 30100</p><p>📞 <a href="tel:+302641048020">+30 26410 48020</a></p><p>📧 <a href="mailto:5LykAgrinio@sch.gr">5LykAgrinio@sch.gr</a></p>`
         },
         en: {
             title: "5th Lyceum Agrinio", hero: "5th General Senior High School of Agrinio", dir: "Principal's Welcome", sch: "The School", 
             era: "Erasmus+ Programs", awa: "Awards", act: "Actions", con: "Contact", news: "Latest News",
+            schText: "The 5th General High School of Agrinio provides a modern learning environment, focusing on the academic progress and the cultivation of values in our students.",
+            schLink: "School Schedule",
             dirMsg: "Dear visitor,\n\nWelcome to our school's official website...\n\nPrincipal: Dr. Fotis Lazarinis",
             contact: `<p>📍 National Stadium, Agrinio 30100</p><p>📞 <a href="tel:+302641048020">+30 26410 48020</a></p><p>📧 <a href="mailto:5LykAgrinio@sch.gr">5LykAgrinio@sch.gr</a></p>`
         }
@@ -153,6 +133,8 @@
         document.getElementById('dir-title').textContent = langData.dir;
         document.getElementById('dir-msg').textContent = langData.dirMsg;
         document.getElementById('sch-title').textContent = langData.sch;
+        document.getElementById('sch-text').textContent = langData.schText;
+        document.getElementById('sch-link').textContent = langData.schLink;
         document.getElementById('era-title').textContent = langData.era;
         document.getElementById('awa-title').textContent = langData.awa;
         document.getElementById('act-title').textContent = langData.act;
@@ -166,44 +148,37 @@
             {id: 'actions', el: 'Δράσεις', en: 'Actions'}, {id: 'contact', el: 'Επικοινωνία', en: 'Contact'}
         ];
         document.getElementById('main-nav').innerHTML = navItems.map(item => `<a href="#${item.id}">${item[currentLang]}</a>`).join('');
-        
         loadAllData();
     }
 
     async function loadAllData() {
-        // Φόρτωση Erasmus (7 στήλες)
+        // Erasmus (7 στήλες)
         fetchSheet(GIDS.erasmus, 'data-erasmus', c => `
-            <div class="item-card">
-                <img src="${c[6]}" onclick="openLightbox(this.src)">
-                <div style="padding:15px;">
-                    <h3 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[0] : c[1]}</h3>
-                    <p><b>${c[2]}</b></p>
-                    <p style="font-size:0.85rem;">${currentLang === 'el' ? c[3] : c[4]}</p>
-                    <a href="${c[5]}" target="_blank" style="color:var(--magenta); font-weight:bold; text-decoration:none;">Website</a>
-                </div>
-            </div>`);
+            <div class="item-card"><img src="${c[6]}" onclick="openLightbox(this.src)"><div style="padding:15px;"><h3 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[0] : c[1]}</h3><p><b>${c[2]}</b></p><p style="font-size:0.85rem;">${currentLang === 'el' ? c[3] : c[4]}</p><a href="${c[5]}" target="_blank" style="color:var(--magenta); font-weight:bold; text-decoration:none;">Website</a></div></div>`);
 
-        // Φόρτωση Awards & Actions (6 στήλες)
-        const standardTemplate = c => `
+        // Awards & Actions (8 στήλες: Date_EL, Date_EN, Title_EL, Title_EN, Desc_EL, Desc_EN, Link, Photo)
+        const stdTemplate = c => `
             <div class="item-card">
-                <img src="${c[5]}" onclick="openLightbox(this.src)">
+                <img src="${c[7]}" onclick="openLightbox(this.src)">
                 <div style="padding:15px;">
-                    <h3 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[0] : c[1]}</h3>
-                    <p style="font-size:0.85rem;">${currentLang === 'el' ? c[2] : c[3]}</p>
-                    <a href="${c[4]}" target="_blank" style="color:var(--magenta); font-weight:bold; text-decoration:none;">Link</a>
+                    <span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span>
+                    <h3 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[2] : c[3]}</h3>
+                    <p style="font-size:0.85rem;">${currentLang === 'el' ? c[4] : c[5]}</p>
+                    <a href="${c[6]}" target="_blank" style="color:var(--magenta); font-weight:bold; text-decoration:none;">Link</a>
                 </div>
             </div>`;
         
-        fetchSheet(GIDS.awards, 'data-awards', standardTemplate);
-        fetchSheet(GIDS.actions, 'data-actions', standardTemplate);
+        fetchSheet(GIDS.awards, 'data-awards', stdTemplate);
+        fetchSheet(GIDS.actions, 'data-actions', stdTemplate);
 
-        // Φόρτωση News (6 στήλες)
+        // News (8 στήλες: Date_EL, Date_EN, Title_EL, Title_EN, Desc_EL, Desc_EN, Link, Attach)
         fetchSheet(GIDS.news, 'data-news', c => `
             <div style="background:#fff; border-left:4px solid var(--magenta); padding:15px; margin-bottom:15px; border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-                <h4 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[0] : c[1]}</h4>
-                <p style="font-size:0.85rem; margin:10px 0;">${currentLang === 'el' ? c[2] : c[3]}</p>
-                <a href="${c[4]}" target="_blank" style="font-size:0.8rem; font-weight:bold; color:var(--magenta); text-decoration:none;">🔗 Link</a>
-                ${c[5] ? ` | <a href="${c[5]}" target="_blank" style="font-size:0.8rem; font-weight:bold; color:var(--purple); text-decoration:none;">📎 Αρχείο</a>` : ''}
+                <span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span>
+                <h4 style="margin:0; color:var(--blue);">${currentLang === 'el' ? c[2] : c[3]}</h4>
+                <p style="font-size:0.85rem; margin:10px 0;">${currentLang === 'el' ? c[4] : c[5]}</p>
+                <a href="${c[6]}" target="_blank" style="font-size:0.8rem; font-weight:bold; color:var(--magenta); text-decoration:none;">🔗 Link</a>
+                ${c[7] ? ` | <a href="${c[7]}" target="_blank" style="font-size:0.8rem; font-weight:bold; color:var(--purple); text-decoration:none;">📎 Αρχείο</a>` : ''}
             </div>`);
     }
 
@@ -214,21 +189,12 @@
             const rows = data.split('\n').slice(1);
             document.getElementById(id).innerHTML = rows.map(row => {
                 const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(s => s.trim().replace(/^"|"$/g, ''));
-                if (cols.length < 3) return ""; 
-                return template(cols);
+                return cols.length < 4 ? "" : template(cols);
             }).join('');
-        } catch (e) { 
-            console.error("Σφάλμα στο φύλλο: " + id);
-            document.getElementById(id).innerHTML = "<p>Προσωρινά μη διαθέσιμο.</p>";
-        }
+        } catch (e) { console.error("Error fetching sheet: " + id); }
     }
 
-    function openLightbox(src) { 
-        document.getElementById('lightbox-img').src = src; 
-        document.getElementById('lightbox').style.display = 'flex'; 
-    }
-
-    // Εκκίνηση
+    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
     renderUI();
 </script>
 </body>
