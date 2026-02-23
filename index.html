@@ -41,48 +41,48 @@
         .section-card { background: white; border-radius: 12px; padding: clamp(15px, 5vw, 30px); margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         h2 { font-family: 'Comfortaa'; color: var(--blue); border-left: 5px solid var(--magenta); padding-left: 15px; margin-bottom: 20px; font-size: clamp(1.1rem, 4vw, 1.5rem); }
 
-        /* School Gallery */
+        /* School Gallery - Διόρθωση για 3 ανά σειρά στο PC */
         .school-gallery { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(3, 1fr); /* 3 στήλες σταθερά */
             gap: 15px; 
             margin: 20px 0; 
         }
         @media (max-width: 600px) {
-            .school-gallery { grid-template-columns: repeat(2, 1fr); }
+            .school-gallery { grid-template-columns: repeat(2, 1fr); } /* 2 στήλες στα κινητά */
         }
         .school-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: 0.3s; }
         .school-gallery img:hover { transform: scale(1.02); }
 
-        /* Grids - Unified size for Erasmus/Awards/Activities */
+        /* Grids για Erasmus & Δράσεις */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
             gap: 20px; 
             margin-top: 20px; 
         }
-
-        /* Specifically 4 columns for Awards on Desktop */
-        @media (min-width: 1024px) {
-            #data-awards { grid-template-columns: repeat(4, 1fr); }
-        }
+        #data-activities { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
 
         .item-card { border: 1px solid #eee; border-radius: 12px; overflow: hidden; background: white; transition: 0.3s; display: flex; flex-direction: column; height: 100%; }
-        .item-card img { width: 100%; height: 120px; object-fit: cover; }
+        .item-card img { width: 100%; height: 150px; object-fit: cover; }
         .erasmus-logo { object-fit: contain !important; background: #f9f9f9; padding: 10px; }
 
+        /* Αφαίρεση υπογράμμισης και σταθερό χρώμα συνδέσμων */
         a { text-decoration: none !important; }
-        .item-card h3 a, .news-item h4 a, .item-card h3 a:visited, .news-item h4 a:visited { color: var(--blue) !important; }
+        .item-card h3 a, .news-item h4 a, .item-card h3 a:visited, .news-item h4 a:visited { 
+            color: var(--blue) !important; 
+            transition: 0.3s; 
+        }
         .item-card h3 a:hover, .news-item h4 a:hover { color: var(--magenta) !important; }
 
-        #sch-text, #dir-msg { white-space: pre-line; line-height: 1.7; color: #444; font-size: 0.95rem; overflow-wrap: break-word; }
+        #sch-text, #dir-msg { 
+            white-space: pre-line; line-height: 1.7; color: #444; 
+            font-size: 0.95rem; overflow-wrap: break-word; 
+        }
 
-        .btn-more { display: inline-block; background: var(--blue); color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; font-size: 0.85rem; }
+        .btn-more { display: inline-block; background: var(--blue); color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; font-size: 0.85rem; text-align: center; }
         .btn-more:hover { background: var(--magenta); transform: translateY(-2px); }
         
-        .hashtag-link { display: inline-block; margin-top: 12px; color: var(--magenta); font-weight: bold; font-family: 'Comfortaa'; text-decoration: none !important; font-size: 1.1rem; transition: 0.3s; }
-        .hashtag-link:hover { transform: scale(1.05); color: var(--blue); }
-
         .social-links { margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap; }
         .social-links a { padding: 10px 15px; border-radius: 5px; color: white !important; font-weight: bold; font-size: 0.8rem; }
         
@@ -91,9 +91,8 @@
         #lightbox, #gallery-popup { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
         #gallery-popup .popup-content { background: white; width: 90%; max-width: 800px; padding: 40px 20px; border-radius: 12px; position: relative; }
         .slider-img { width: 100%; max-height: 60vh; object-fit: contain; border-radius: 8px; }
-        .nav-btn { position: absolute; background: rgba(63, 81, 181, 0.7); color: white; padding: 12px; border-radius: 50%; top: 50%; transform: translateY(-50%); border: none; cursor: pointer; }
+        .nav-btn { position: absolute; background: rgba(63, 81, 181, 0.7); color: white; padding: 12px; border-radius: 50%; top: 50%; transform: translateY(-50%); border: none; cursor: pointer; z-index: 10; }
         .prev-btn { left: 10px; } .next-btn { right: 10px; }
-        .date-badge { background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #666; display: inline-block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -124,10 +123,9 @@
                 <img src="school5.jpg" onclick="openLightbox(this.src)"><img src="school6.jpg" onclick="openLightbox(this.src)">
             </div>
             <button class="btn-more" onclick="openGalleryPopup()" id="more-photos-btn"></button>
-            <br>
+<br>
             <a href="https://www.facebook.com/hashtag/5hsagrinio" target="_blank" class="hashtag-link">#5HSagrinio</a>
-            
-            <div id="sch-text" style="margin-top:20px;"></div>
+            <div id="sch-text"></div>
             <a href="https://drive.google.com/file/d/1PnjvnAjdiVgyTsCaBQiECdF14dt53QmM/view?usp=sharing" target="_blank" class="btn-more" id="sch-link" style="background:var(--blue);"></a>
         </section>
 
@@ -166,21 +164,23 @@
             <h2 id="news-title" style="font-size: 1.1rem;"></h2>
             <div id="data-news"></div>
             <button class="btn-more" onclick="showArchive('news')" id="old-news-btn"></button>
+            <hr style="margin:20px 0;">
+            <div class="fb-page" data-href="https://www.facebook.com/5HighSchoolAgrinioGR/" data-tabs="timeline" data-width="340" data-small-header="true" data-adapt-container-width="true"></div>
         </div>
     </aside>
 </div>
 
-<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" style="max-width:90%; max-height:90%;"></div>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img"></div>
 <div id="gallery-popup" onclick="closeGalleryPopup(event)">
     <div class="popup-content">
-        <span class="close-btn" onclick="document.getElementById('gallery-popup').style.display='none'" style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;">×</span>
+        <span class="close-btn" onclick="document.getElementById('gallery-popup').style.display='none'">×</span>
         <h2 id="popup-title" style="border:none; margin-bottom: 20px;"></h2>
-        <div class="slider-container" style="position:relative; text-align:center;">
+        <div class="slider-container">
             <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
             <img id="slider-img" src="school7.jpg" class="slider-img" onclick="openLightbox(this.src)">
             <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
         </div>
-        <p id="slider-count" style="margin-top: 15px; color: #666; font-size: 0.9rem; text-align:center;"></p>
+        <p id="slider-count" style="margin-top: 15px; color: #666; font-size: 0.9rem;"></p>
     </div>
 </div>
 
@@ -203,8 +203,8 @@
             contact: `<p>📍 Εθνικό Στάδιο, Αγρίνιο 30100</p><p>📞 <a href="tel:+302641048020">+30 26410 48020</a></p><p>📧 <a href="mailto:5LykAgrinio@sch.gr">5LykAgrinio@sch.gr</a></p>`
         },
         en: {
-            title: "5th Senior High School of Agrinio", hero: "5th Senior High School of Agrinio, Greece", dir: "Principal's Welcome", sch: "The School", 
-            era: "Erasmus+ Programs", awa: "Major Awards", act: "Activities", con: "Contact", news: "Announcements",
+            title: "5th Senior High School of Agrinio, Greece", hero: "5th Senior High School of Agrinio & Teacher Training Center, Greece", dir: "Principal's Welcome", sch: "The School", 
+            era: "Erasmus+ Programs", awa: "Most important Awards", act: "Activities", con: "Contact", news: "Announcements",
             schLink: "School Schedule", oldNews: "All Announcements", oldEra: "All Programs", 
             oldAwa: "All Awards", oldAct: "All Activities", morePhotos: "More photos", popupTitle: "School Photos",
             schText: "\nApproximately 240 students aged 14–18 and 25 teachers of various specialties attend the school (Greek literature, Mathematicians, Natural Sciences, Foreign Languages, Computer Science, Economics, Religious Education, and Physical Education teachers). There are 10 general education classes in Grades A, B, and C. In the last two grades, 10 specialization-track classes operate. According to the Greek educational system, General Upper Secondary Schools offer general education subjects and specialization-track subjects.\n\nStudents participate in multiple activities, cultural, environmental, and other school programs. We implement multiple Erasmus+ programs that have helped us upgrade the school and provided opportunities for collaboration with universities, NGOs, and schools abroad. In recent years there has been an active robotics team with awards, as well as other groups whose activities have brought prizes and recognition to our school.\n\nEach classroom is equipped with an interactive whiteboard. There are 2 computer labs, 1 natural sciences lab, 1 robotics lab, an Erasmus+ room, and an events hall. The school is located next to the municipal stadium with direct access to sports facilities.\n\nThe 5th High School of Agrinio also serves as a Certified Teacher Training Center.", 
@@ -238,6 +238,7 @@
         document.getElementById('old-awa-btn').textContent = langData.oldAwa;
         document.getElementById('old-act-btn').textContent = langData.oldAct;
         document.getElementById('more-photos-btn').textContent = langData.morePhotos;
+        document.getElementById('popup-title').textContent = langData.popupTitle;
         document.getElementById('contact-details').innerHTML = langData.contact;
         const navItems = [{id: 'home', el: 'Αρχική', en: 'Home'}, {id: 'news-section', el: 'Ανακοινώσεις', en: 'Announcements'}, {id: 'school', el: 'Σχολείο', en: 'School'}, {id: 'erasmus', el: 'Erasmus+', en: 'Erasmus+'}, {id: 'awards', el: 'Διακρίσεις', en: 'Awards'}, {id: 'activities', el: 'Δράσεις', en: 'Activities'}, {id: 'contact', el: 'Επικοινωνία', en: 'Contact'}];
         document.getElementById('main-nav').innerHTML = navItems.map(item => `<a href="#${item.id}">${item[currentLang]}</a>`).join('');
@@ -261,65 +262,29 @@
     }
 
     function renderGrids() {
-        // Erasmus: 8 items
-        document.getElementById('data-erasmus').innerHTML = database.erasmus.slice(0, 8).map(c => `
-            <div class="item-card">
-                <a href="${c[5]}" target="_blank"><img src="${c[6]}" class="erasmus-logo"></a>
-                <div style="padding:12px;">
-                    <h3 style="margin:0; font-size:0.9rem;"><a href="${c[5]}" target="_blank">${currentLang === 'el' ? c[0] : c[1]}</a></h3>
-                    <p style="font-size:0.75rem; color:var(--magenta); margin:5px 0;"><b>${c[2]}</b></p>
-                </div>
-            </div>`).join('');
-        
-        // Awards: 12 items (4 per row on desktop)
-        document.getElementById('data-awards').innerHTML = database.awards.slice(0, 12).map(c => `
-            <div class="item-card">
-                <img src="${c[7]}" onclick="openLightbox(this.src)">
-                <div style="padding:12px;">
-                    <span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span>
-                    <h3 style="margin:0; font-size:0.9rem;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h3>
-                </div>
-            </div>`).join('');
-
-        // Activities: 15 items
-        document.getElementById('data-activities').innerHTML = database.activities.slice(0, 15).map(c => `
-            <div class="item-card">
-                <img src="${c[7]}" onclick="openLightbox(this.src)">
-                <div style="padding:12px;">
-                    <span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span>
-                    <h3 style="margin:0; font-size:0.9rem;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h3>
-                </div>
-            </div>`).join('');
-
-        document.getElementById('data-news').innerHTML = database.news.slice(0, 5).map(c => `
-            <div class="news-item" style="margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                <span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span>
-                <h4 style="margin:0; font-size:0.9rem;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h4>
-            </div>`).join('');
+        document.getElementById('data-erasmus').innerHTML = database.erasmus.slice(0, 9).map(c => `<div class="item-card"><a href="${c[5]}" target="_blank"><img src="${c[6]}" class="erasmus-logo"></a><div style="padding:15px;"><h3 style="margin:0; font-size:1rem;"><a href="${c[5]}" target="_blank">${currentLang === 'el' ? c[0] : c[1]}</a></h3><p style="font-size:0.8rem; color:var(--magenta); margin:5px 0;"><b>${c[2]}</b></p><p style="font-size:0.8rem;">${currentLang === 'el' ? c[3] : c[4]}</p></div></div>`).join('');
+        document.getElementById('data-awards').innerHTML = database.awards.slice(0, 9).map(c => `<div class="item-card"><img src="${c[7]}" onclick="openLightbox(this.src)"><div style="padding:15px;"><span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span><h3 style="margin:0; font-size:1rem;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h3><p style="font-size:0.8rem;">${currentLang === 'el' ? c[4] : c[5]}</p></div></div>`).join('');
+        document.getElementById('data-activities').innerHTML = database.activities.slice(0, 15).map(c => `<div class="item-card"><img src="${c[7]}" onclick="openLightbox(this.src)" style="height:120px;"><div style="padding:12px;"><span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span><h3 style="margin:0; font-size:0.9rem;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h3></div></div>`).join('');
+        document.getElementById('data-news').innerHTML = database.news.slice(0, 5).map(c => `<div class="news-item"><span class="date-badge">${currentLang === 'el' ? c[0] : c[1]}</span><h4 style="margin:0;"><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></h4><p style="font-size:0.8rem;">${currentLang === 'el' ? c[4] : c[5]}</p>${c[7] ? `<a href="${c[7]}" target="_blank" style="font-size:0.75rem; color:var(--purple); font-weight:bold; text-decoration:none;">📎 Συνημμένο</a>` : ''}</div>`).join('');
     }
 
     function changeSlide(direction) { currentSlideIndex += direction; if (currentSlideIndex < 0) currentSlideIndex = galleryPhotos.length - 1; if (currentSlideIndex >= galleryPhotos.length) currentSlideIndex = 0; updateSlider(); }
     function updateSlider() { const img = document.getElementById('slider-img'); if (img) { img.src = galleryPhotos[currentSlideIndex]; document.getElementById('slider-count').textContent = `${currentSlideIndex + 1} / ${galleryPhotos.length}`; } }
-    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+    function showArchive(type) { const win = window.open("", "_blank"); const langData = ui[currentLang]; const data = database[type]; let title = langData[type === 'erasmus' ? 'oldEra' : type === 'awards' ? 'oldAwa' : type === 'activities' ? 'oldAct' : 'oldNews']; let html = `<html><head><title>${title}</title><style>body { font-family: sans-serif; padding: 20px; } table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 12px; text-align: left; } th { background: #3f51b5; color: white; } a { color: #e91e63; font-weight: bold; text-decoration: none; }</style></head><body><h2>${title}</h2><table><tr><th>Info</th><th>Title</th><th>Description</th><th>Link</th></tr>`; data.forEach(c => { if (type === 'erasmus') { html += `<tr><td>${c[2]}</td><td><a href="${c[5]}" target="_blank">${currentLang === 'el' ? c[0] : c[1]}</a></td><td>${currentLang === 'el' ? c[3] : c[4]}</td><td><a href="${c[5]}" target="_blank">🔗</a></td></tr>`; } else { html += `<tr><td>${currentLang === 'el' ? c[0] : c[1]}</td><td><a href="${c[6]}" target="_blank">${currentLang === 'el' ? c[2] : c[3]}</a></td><td>${currentLang === 'el' ? c[4] : c[5]}</td><td>${c[7] ? `<a href="${c[7]}" target="_blank">📎</a>` : '-'}</td></tr>`; } }); html += `</table></body></html>`; win.document.write(html); win.document.close(); }
     function openGalleryPopup() { document.getElementById('gallery-popup').style.display = 'flex'; }
     function closeGalleryPopup(e) { if(e.target.id === 'gallery-popup') document.getElementById('gallery-popup').style.display = 'none'; }
-    
-    // Archive Logic
-    function showArchive(type) {
-        const win = window.open("", "_blank");
-        const langData = ui[currentLang];
-        const data = database[type];
-        let title = langData[type === 'erasmus' ? 'oldEra' : type === 'awards' ? 'oldAwa' : type === 'activities' ? 'oldAct' : 'oldNews'];
-        let html = `<html><head><title>${title}</title><style>body { font-family: sans-serif; padding: 20px; } table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 12px; text-align: left; } th { background: #3f51b5; color: white; } a { color: #e91e63; font-weight: bold; text-decoration: none; }</style></head><body><h2>${title}</h2><table><tr><th>Info</th><th>Title</th><th>Link</th></tr>`;
-        data.forEach(c => {
-            if (type === 'erasmus') { html += `<tr><td>${c[2]}</td><td>${currentLang === 'el' ? c[0] : c[1]}</td><td><a href="${c[5]}" target="_blank">🔗</a></td></tr>`; }
-            else { html += `<tr><td>${currentLang === 'el' ? c[0] : c[1]}</td><td>${currentLang === 'el' ? c[2] : c[3]}</td><td><a href="${c[6]}" target="_blank">🔗</a></td></tr>`; }
-        });
-        html += `</table></body></html>`;
-        win.document.write(html); win.document.close();
-    }
-    
+    function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
     renderUI();
 </script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/el_GR/sdk.js#xfbml=1&version=v18.0"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
